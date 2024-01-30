@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import Hobbies from "./components/Hobbies";
+import NewHobbies from "./components/NewHobbies";
+import { useState } from "react";
+
+const DUMMY_HOBBIES = [
+  {
+    id: "h1",
+    title: "Soccer",
+    description: "Kick the ball into the goal!"
+  },
+  {
+    id: "h2",
+    title: "Valorant",
+    description: "FPS video game"
+  },
+  {
+    id: "h3",
+    title: "Baking",
+    description: "Making cakes"
+  },
+];
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+  const [hobbies, setHobbies] = useState(DUMMY_HOBBIES)
+
+  const addHobbyHandler = (hobby) => {
+    setHobbies(prevHobbies => {
+      return [hobby, ...prevHobbies]
+    })
+  }
+  
+  return(
+    <div>
+      <h1>Enter your hobbies!</h1>
+      <NewHobbies onAddHobby={addHobbyHandler}/>
+      <Hobbies items={hobbies}/>
     </div>
   );
 }
